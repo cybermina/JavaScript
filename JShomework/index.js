@@ -1,40 +1,112 @@
-// firstname,lastname,username,email,gender,age,password.
-<form class="js-form">
-  <div>
-    <label for="firstname">First Name:</label>
-    <input type="text" id="firstname" class="js-firstname-inp" placeholder="Enter your first name" />
-  </div>
+//1-masala
+function sameFirstLast(arr) {
+  return arr[0] === arr[arr.length - 1];
+}
+console.log("1:", sameFirstLast([1, 2, 1])); 
 
-  <div>
-    <label for="lastname">Last Name:</label>
-    <input type="text" id="lastname" class="js-lastname-inp" placeholder="Enter your last name" />
-  </div>
+//2-masala
+function oneCount(...arrays) {
+  let count = 0;
 
-  <div>
-    <label for="username">Username:</label>
-    <input type="text" id="username" class="js-username-inp" placeholder="Enter your username" />
-  </div>
+  for (let arr of arrays) {
+    if (arr.includes(1)) count++;
+  }
 
-  <div>
-    <label for="email">Email:</label>
-    <input type="email" id="email" class="js-useremail-inp" placeholder="Enter your email" />
-  </div>
+  if (count === 1) return "ONE";
+  if (count === 2) return "TWO";
+  if (count === 3) return "THREE";
+  if (count === 4) return "FOUR";
 
-  <div>
-    <label for="gender">Gender:</label>
-    <select id="gender" class="js-gender-inp">
-      <option value="">-- Select gender --</option>
-      <option value="male">Male</option>
-      <option value="female">Female</option>
-      <option value="other">Other</option>
-    </select>
-  </div>
+  return count;
+}
+console.log("2:", oneCount([1,2], [7,1], [2,3])); 
 
-  <div>
-    <label for="password">Password:</label>
-    <input type="password" id="password" class="js-password-inp" placeholder="Enter your password" />
-    <button type="button" class="js-show-password">Show</button>
-  </div>
+//3-masala
+function answerCell(...args) {
+  if (args.length === 2) return true;
 
-  <button type="submit">Submit</button>
-</form>
+  for (let a of args) {
+    if (a === true) return true;
+  }
+
+  return false;
+}
+console.log("3:", answerCell(false, false, true));
+
+//4-masala
+function blackjack(a, b) {
+  let max = 0;
+
+  if (a <= 21) max = a;
+  if (b <= 21 && b > max) max = b;
+
+  return {
+    max_number: max,
+    arr: [a, b, "TWO", "ONE"],
+    arr_length: 4,
+    type: "string"
+  };
+}
+console.log("4:", blackjack(19, 21));
+
+//5-masala
+function removeDups(arr) {
+  let result = [];
+
+  for (let item of arr) {
+    if (!result.includes(item)) result.push(item);
+  }
+
+  return result;
+}
+console.log("5:", removeDups([1, 0, 1, 0]));
+
+//6-masala
+function getSumm(matrix) {
+  let sum = 0;
+
+  for (let row of matrix) {
+    for (let num of row) sum += num;
+  }
+
+  if (sum > 10) return { sum: sum };
+  return { sum: "seven" };
+}
+
+console.log("6:", getSumm([
+  [0,1,0,0],
+  [1,1,0,1],
+  [0,1,0,1],
+  [0,0,1,5]
+])); 
+
+//7-masala
+function uniqueSort(arr) {
+  let result = [];
+
+  for (let n of arr) {
+    if (!result.includes(n)) result.push(n);
+  }
+
+  result.sort((a, b) => a - b);
+  return result;
+}
+
+console.log("7:", uniqueSort([1, 2, 4, 3]));
+
+//8-masala
+function specialReverse(text, letter) {
+  let words = text.split(" ");
+  let result = { searches: "", super: "" };
+
+  for (let w of words) {
+    if (w[0].toLowerCase() === letter.toLowerCase()) {
+      let reversed = w.split("").reverse().join("");
+      result.searches = reversed;
+      result.super = reversed;
+    }
+  }
+  return result;
+}
+
+console.log("8:", specialReverse("super search", "s"));
