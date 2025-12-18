@@ -1,0 +1,206 @@
+:root {
+  --glass: rgba(255,255,255,0.1);
+  --ice: #bfe6ff;
+  --gold: #ffd166;
+
+  /* Dark Theme */
+  --bg-dark: rgba(8,18,38,0.45);
+  --text-dark: #eaf6ff;
+  --card-dark: rgba(255,255,255,0.1);
+
+  /* Light Theme */
+  --bg-light: rgba(255,255,255,0.4);
+  --text-light: #111111;
+  --card-light: rgba(255,255,255,0.7);
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html, body{
+  height:100%;
+  font-family:'Montserrat', system-ui, Arial;
+  transition: all 0.3s ease;
+}
+
+/* 🎄 BODY — новогодняя картинка + overlay */
+body {
+  min-height:100vh;
+  padding:30px;
+  overflow-x:hidden;
+  position:relative;
+  color: var(--text-dark);
+  background:
+    linear-gradient(var(--bg-dark), var(--bg-dark)),
+    url("https://i.ytimg.com/vi/yY54Ldnu68s/maxresdefault.jpg") center/cover no-repeat fixed;
+}
+
+/* 🌞 Light Theme */
+body.light {
+  color: var(--text-light);
+  background:
+    linear-gradient(var(--bg-light), var(--bg-light)),
+    url("https://i.ytimg.com/vi/yY54Ldnu68s/maxresdefault.jpg") center/cover no-repeat fixed;
+}
+
+/* ❄️ СНЕГ */
+body::before,
+body::after{
+  content:"";
+  position:fixed;
+  top:-100%;
+  left:0;
+  width:100%;
+  height:300%;
+  background-image:
+    radial-gradient(2px 2px at 20% 30%, white 100%, transparent),
+    radial-gradient(2px 2px at 80% 40%, white 100%, transparent),
+    radial-gradient(1px 1px at 50% 70%, white 100%, transparent),
+    radial-gradient(3px 3px at 30% 90%, white 100%, transparent);
+  background-size:200px 200px;
+  animation:snow 20s linear infinite;
+  opacity:0.6;
+  pointer-events:none;
+  z-index:1;
+}
+
+body::after{
+  animation-duration:35s;
+  opacity:0.3;
+}
+
+@keyframes snow{
+  0%{ transform:translateY(0); }
+  100%{ transform:translateY(100%); }
+}
+
+/* 🧭 Кнопки регионов и темы */
+.buttons{
+  display:flex;
+  gap:15px;
+  justify-content:center;
+  margin-bottom:25px;
+  position:relative;
+  z-index:2;
+}
+
+.buttons button,
+.js-theme-btn{
+  background:var(--glass);
+  backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,0.3);
+  color:#fff;
+  padding:12px 26px;
+  border-radius:20px;
+  cursor:pointer;
+  font-size:16px;
+  transition:0.3s;
+}
+
+.buttons button:hover,
+.js-theme-btn:hover{
+  background:rgba(255,255,255,0.2);
+  color:var(--gold);
+  transform:translateY(-3px);
+}
+
+/* 🔍 Поиск */
+.search-input{
+  display:block;
+  margin:0 auto 40px;
+  width:100%;
+  max-width:420px;
+  padding:14px 22px;
+  border-radius:25px;
+  background:var(--glass);
+  backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,0.35);
+  color:#fff;
+  font-size:16px;
+  outline:none;
+  position:relative;
+  z-index:2;
+}
+
+.search-input::placeholder{
+  color:rgba(255,255,255,0.75);
+}
+
+.search-input:focus{
+  border-color:var(--gold);
+  box-shadow:0 0 15px rgba(255,209,102,0.5);
+}
+
+/* 🌍 Timeline */
+.timeline{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(280px,1fr));
+  gap:30px;
+  position:relative;
+  z-index:2;
+}
+
+/* 🎁 Карточка страны */
+article{
+  background:var(--glass);
+  backdrop-filter:blur(14px);
+  border-radius:22px;
+  padding:20px;
+  box-shadow:0 10px 40px rgba(0,0,0,0.4);
+  border:1px solid rgba(255,255,255,0.25);
+  transition:0.4s;
+}
+
+article:hover{
+  transform:translateY(-8px) scale(1.03);
+  box-shadow:0 18px 60px rgba(0,0,0,0.6);
+}
+
+/* 📝 Контент */
+.timeline__content h1{
+  font-size:22px;
+  margin-bottom:10px;
+  color:var(--gold);
+}
+
+.timeline__content h2{
+  font-size:16px;
+  margin-bottom:8px;
+  color:var(--ice);
+}
+
+.timeline__content p{
+  font-size:14px;
+  opacity:0.95;
+}
+
+.timeline__content hr{
+  border:none;
+  height:1px;
+  background:rgba(255,255,255,0.25);
+  margin:10px 0;
+}
+
+/* 🏳️ Флаг */
+article img{
+  width:100%;
+  margin-top:15px;
+  border-radius:16px;
+  box-shadow:0 6px 20px rgba(0,0,0,0.4);
+}
+
+/* ⚡ Переключение кнопок под темы */
+body.light .buttons button,
+body.light .js-theme-btn{
+  background: var(--card-light);
+  color: var(--text-light);
+}
+
+body.dark .buttons button,
+body.dark .js-theme-btn{
+  background: var(--card-dark);
+  color: var(--text-dark);
+}
